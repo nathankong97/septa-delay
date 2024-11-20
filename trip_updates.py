@@ -28,7 +28,7 @@ logging.basicConfig(
 
 json_filename = f"{scraping_dir}/trip-updates_{get_timestamp()}.json"
 
-API_URL = "https://www3.septa.org/api/gtfsrt/septarail-pa-us/Trip/print.php"
+API_URL = "https://www3.septa.org/gtfsrt/septarail-pa-us/Trip/rtTripUpdates.pb"
 
 
 def fetch_and_store_data():
@@ -37,9 +37,9 @@ def fetch_and_store_data():
         response = requests.get(API_URL)
         response.raise_for_status()
         feed.ParseFromString(response.content)
-        data = MessageToDict(feed.entity)
+        data = MessageToDict(feed)
 
-        # Store data in JSON file
+
         with open(json_filename, "w") as file:
             json.dump(data, file, indent=4)
 
