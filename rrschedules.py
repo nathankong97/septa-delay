@@ -4,7 +4,7 @@ import os
 import logging
 from datetime import datetime
 
-# TODO: Need to research train number data
+# WILLDO: Need to research train number data
 def get_timestamp():
     return datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
