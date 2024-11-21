@@ -127,7 +127,12 @@ def save_to_json(data, filename):
 
 def main():
     today_date = datetime.now().strftime("%Y-%m-%d")
+    scraping_dir = f"{SCRAPING_DIR_BASE}/{today_date}"
     log_dir = f"{LOG_DIR_BASE}/{today_date}"
+    create_directories(DATA_DIR)
+    create_directories(scraping_dir)
+    create_directories(log_dir)
+
     setup_logging(log_dir)
     logging.info("Parsing RSS feed for GTFS updates...")
     feed = feedparser.parse(RSS_URL)
@@ -140,17 +145,13 @@ def main():
 
     if one_day_before <= update_datetime <= current_time:
         logging.info("GTFS update found within the last 24 hours. Downloading new data...")
-        create_directories(DATA_DIR)
+
         download_zip_path = os.path.join(DATA_DIR, "septa_gtfs.zip")
         download_and_extract_zip(GTFS_ZIP_URL, download_zip_path, DATA_DIR)
         update_database(DATA_DIR, DB_PATH)
     else:
         logging.info("No GTFS updates found within the last 24 hours.")
     output = query_database(DB_PATH, day_of_week)[:15]
-    scraping_dir = f"{SCRAPING_DIR_BASE}/{today_date}"
-
-    create_directories(scraping_dir)
-    create_directories(log_dir)
 
     json_filename = f"{scraping_dir}/rr-schedule_{get_timestamp()}.json"
     logging.info("Starting asynchronous API calls...")
