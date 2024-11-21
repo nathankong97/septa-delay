@@ -1,3 +1,5 @@
 protobuf
 requests
 feedparser
+pandas
+aiohttp

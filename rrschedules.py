@@ -126,6 +126,9 @@ def save_to_json(data, filename):
 
 
 def main():
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    log_dir = f"{LOG_DIR_BASE}/{today_date}"
+    setup_logging(log_dir)
     logging.info("Parsing RSS feed for GTFS updates...")
     feed = feedparser.parse(RSS_URL)
     latest_release_update = feed["entries"][0]["updated"]
@@ -144,13 +147,10 @@ def main():
     else:
         logging.info("No GTFS updates found within the last 24 hours.")
     output = query_database(DB_PATH, day_of_week)[:15]
-
-    today_date = datetime.now().strftime("%Y-%m-%d")
     scraping_dir = f"{SCRAPING_DIR_BASE}/{today_date}"
-    log_dir = f"{LOG_DIR_BASE}/{today_date}"
+
     create_directories(scraping_dir)
     create_directories(log_dir)
-    setup_logging(log_dir)
 
     json_filename = f"{scraping_dir}/rr-schedule_{get_timestamp()}.json"
     logging.info("Starting asynchronous API calls...")
