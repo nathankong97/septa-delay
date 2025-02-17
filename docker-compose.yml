@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  septa_scraper:
+    build: .
+    container_name: septa_scraper
+    restart: always
+    volumes:
+      - ./data:/septa-delay/data
+      - ./logs:/septa-delay/logs
+      - ./logs:/septa-delay/scraping
+    environment:
+      - PYTHONUNBUFFERED=1

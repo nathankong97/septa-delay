@@ -3,3 +3,5 @@ requests
 feedparser
 pandas
 aiohttp
+gtfs-realtime-bindings
+sqlalchemy
