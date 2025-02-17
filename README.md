@@ -10,16 +10,16 @@ This project is containerized with **Docker**, making deployment easy on any ser
 
 ---
 
-## 1. Features
+## **Features**
 
 1. Scrapes real-time train positions
 2. Stores historical delay data
 3. Downloads & updates GTFS schedules
 4. Fully automated with cron jobs inside Docker
 
---
+---
 
-## 2. Deployment Guide
+## **Deployment Guide**
 
 ### 1. Install Docker & Docker Compose
 Before running the scraper, install Docker:
@@ -48,7 +48,7 @@ This will:
 
 ---
 
-## 3. Managing the Scraper
+## **Managing the Scraper**
 ### Check Running Containers
 ```shell
 docker ps
@@ -64,7 +64,7 @@ docker-compose down
 
 ---
 
-## 4. Project Strcuture
+## **Project Structure**
 ```text
 septa-delay/
 ├── data/                 # Stores SQLite databases (Persistent)
