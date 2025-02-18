@@ -4,6 +4,9 @@ FROM python:3.10
 # Set the working directory inside the container
 WORKDIR /septa-delay
 
+# Install cron
+RUN apt-get update && apt-get install -y cron
+
 # Copy project files into the container
 COPY . .
 
