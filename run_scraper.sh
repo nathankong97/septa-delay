@@ -4,9 +4,9 @@ echo "Starting SEPTA Scraper..."
 
 python -c "from septa.core.database import init_trip_updates_db, init_db; init_trip_updates_db(); init_db()"
 
-echo "45 23,0-1 * * * python /septa-delay/septa/rrschedules.py" >> mycron
-echo "*/10 4-23,0-1 * * * python /septa-delay/septa/train_view.py" >> mycron
-echo "*/10 4-23,0-1 * * * python /septa-delay/septa/trip_updates.py" >> mycron
+echo "45 23,0-1 * * * cd /septa-delay && python -m septa.rrschedules" >> mycron
+echo "*/10 4-23,0-1 * * * cd /septa-delay && python -m septa.train_view" >> mycron
+echo "*/10 4-23,0-1 * * * cd /septa-delay && python -m septa.trip_updates" >> mycron
 
 crontab mycron
 cron -f
