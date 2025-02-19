@@ -57,9 +57,13 @@ docker ps
 ```shell
 docker logs septa_scraper
 ```
-###
+### Shutdown Docker
 ```shell
 docker-compose down
+```
+### Access Container
+```shell
+docker exec -it septa_scraper
 ```
 
 ---
