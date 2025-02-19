@@ -1,12 +1,19 @@
 #!/bin/bash
 
-echo "Starting SEPTA Scraper..."
+echo "🚀 Starting SEPTA Scraper..."
 
-python -c "from septa.core.database import init_trip_updates_db, init_db; init_trip_updates_db(); init_db()"
+# Get the correct Python path dynamically
+PYTHON_PATH=$(which python3)
 
-echo "45 23,0-1 * * * cd /septa-delay && python -m septa.rrschedules" >> mycron
-echo "*/10 4-23,0-1 * * * cd /septa-delay && python -m septa.train_view" >> mycron
-echo "*/10 4-23,0-1 * * * cd /septa-delay && python -m septa.trip_updates" >> mycron
+# Write cron jobs to a file using the correct Python path
+echo "45 23,0-1 * * * cd /septa-delay && $PYTHON_PATH -m septa.rrschedules >> /septa-delay/logs/rrschedules_cron.log 2>&1" > mycron
+echo "*/10 4-23,0-1 * * * cd /septa-delay && $PYTHON_PATH -m septa.train_view >> /septa-delay/logs/train_view_cron.log 2>&1" >> mycron
+echo "*/10 4-23,0-1 * * * cd /septa-delay && $PYTHON_PATH -m septa.trip_updates >> /septa-delay/logs/trip_updates_cron.log 2>&1" >> mycron
 
+# Install the cron jobs
 crontab mycron
-cron -f
+
+# Start cron
+service cron start
+
+echo "✅ Cron jobs installed with Python path: $PYTHON_PATH"
