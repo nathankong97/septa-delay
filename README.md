@@ -10,7 +10,7 @@ This project is containerized with **Docker**, making deployment easy on any ser
 
 ---
 
-## **Features**
+## 🎯 **Features**
 
 1. Scrapes real-time train positions
 2. Stores historical delay data
@@ -19,7 +19,7 @@ This project is containerized with **Docker**, making deployment easy on any ser
 
 ---
 
-## **Deployment Guide**
+## 📥 **Deployment Guide**
 
 ### 1. Install Docker & Docker Compose
 Before running the scraper, install Docker:
@@ -48,7 +48,7 @@ This will:
 
 ---
 
-## **Managing the Scraper**
+## 🐳 **Managing the Scraper**
 ### Check Running Containers
 ```shell
 docker ps
@@ -68,7 +68,7 @@ docker exec -it septa_scraper
 
 ---
 
-## **Project Structure**
+## 📁 **Project Structure**
 ```text
 septa-delay/
 ├── data/                 # Stores SQLite databases (Persistent)
